@@ -3,7 +3,7 @@ Dairy_df=function(iCalf = 220,iHeifer_first_lact = 70,iHeifer_second_lact = 70,i
                   fourthCull = 0.5,kCull = 80.0,kMortality = 0.07,Breed = 1,FCM = 3.0,calf_ME = 5.0,calf_CP = 16.0,fed_calf_P = 0.45,
                   heifer_ME = 5.0,heifer_CP = 17.0,fed_heifer_P = 0.45,lact_CP = 17.0,fed_lact_P = 0.45,dry_CP = 17.0,fed_dry_P = 0.45,HRS = 12.0,Temp = 24.0,
                   RHMD = 75.0,WS = 1.0,Date=as.array(AllDays$date)){
-
+  
   #####################################################################################
   
   
@@ -245,7 +245,8 @@ Dairy_df=function(iCalf = 220,iHeifer_first_lact = 70,iHeifer_second_lact = 70,i
   ###############adding a column of amount of fertilizer applied to that hru
   animal_number$Fert_applied=0
   for (i in HRU_number){
-    animal_number$Fert_applied[animal_number$Date==get(paste0("Date_of_application",i,sep=""))]=get(paste0("fert_applied",i, sep= ""))
+    #i=10114
+    animal_number$Fert_applied[animal_number$Date==mgt_datafram$Date_app[mgt_datafram$HRU_number==i]]=mgt_datafram$FERT_APPLIED[mgt_datafram$HRU_number==i]
   }
   ##########################################################################
   ##################################################
@@ -328,9 +329,9 @@ Dairy_df=function(iCalf = 220,iHeifer_first_lact = 70,iHeifer_second_lact = 70,i
   for(i in 1:nrow(animal_number)){
     if (i+1 <= nrow(Date)){
       if(animal_number$Fert_applied[i] <=animal_number$TotalNP_barn[i]){
-      animal_number$TotalNP_barn[i+1]=animal_number$TotalNP_barn[i]+animal_number$totalNP[i]-animal_number$Fert_applied[i]
-      animal_number$Total_N_barn_stored[i+1]=animal_number$Total_N_barn_stored[i] + animal_number$total_N_barn[i+1]-(animal_number$Total_N_barn_stored[i]/animal_number$TotalNP_barn[i])*animal_number$Fert_applied[i]
-      animal_number$Total_P_barn_stored[i+1] = animal_number$Total_P_barn_stored[i] + animal_number$total_P_barn[i+1]-(animal_number$Total_P_barn_stored[i]/animal_number$TotalNP_barn[i])*animal_number$Fert_applied[i]
+        animal_number$TotalNP_barn[i+1]=animal_number$TotalNP_barn[i]+animal_number$totalNP[i]-animal_number$Fert_applied[i]
+        animal_number$Total_N_barn_stored[i+1]=animal_number$Total_N_barn_stored[i] + animal_number$total_N_barn[i+1]-(animal_number$Total_N_barn_stored[i]/animal_number$TotalNP_barn[i])*animal_number$Fert_applied[i]
+        animal_number$Total_P_barn_stored[i+1] = animal_number$Total_P_barn_stored[i] + animal_number$total_P_barn[i+1]-(animal_number$Total_P_barn_stored[i]/animal_number$TotalNP_barn[i])*animal_number$Fert_applied[i]
       } else{
         stop("Increase the number of animal in the barn or decrease the amount of fertilizer applied")
         
