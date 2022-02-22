@@ -7,6 +7,7 @@ Dairy_df=function(iCalf = 220,iHeifer_first_lact = 70,iHeifer_second_lact = 70,i
   #####################################################################################
   
   
+  
   iBarn=iHeifer_first_lact + iHeifer_second_lact + iHeifer_third_lact + iLact # init # of animals in the barn
   iPasture=iCalf + iHeifer_first_dry + iHeifer_second_dry + iHeifer_third_dry + iDry #init # of animals in the pasture
   animal_number=data.frame(matrix(ncol=40, nrow=nrow(Date)))
@@ -311,7 +312,7 @@ Dairy_df=function(iCalf = 220,iHeifer_first_lact = 70,iHeifer_second_lact = 70,i
   animal_number$total_P_Past = animal_number$dry_P + animal_number$calf_P + animal_number$heifer_first_dry_P + 
     animal_number$heifer_second_dry_P + animal_number$heifer_third_dry_P  ##daily kg of total P produced in the pasture
   #################################################################
-  ########daity totalNP in the barn
+  ########daily totalNP in the barn daily N +daily P
   #######################################################################
   animal_number$totalNP=animal_number$total_N_barn+animal_number$total_P_barn
   
@@ -324,18 +325,17 @@ Dairy_df=function(iCalf = 220,iHeifer_first_lact = 70,iHeifer_second_lact = 70,i
   animal_number$Total_P_barn_stored=0
   animal_number$Total_N_barn_stored[1]=animal_number$total_N_barn[1]
   animal_number$Total_P_barn_stored[1]=animal_number$total_P_barn[1]
-  animal_number$TotalNP_barn=NA
+  animal_number$TotalNP_barn=0
   animal_number$TotalNP_barn[1]=animal_number$totalNP[1]
   for(i in 1:nrow(animal_number)){
     if (i+1 <= nrow(Date)){
-      if(animal_number$Fert_applied[i] <=animal_number$TotalNP_barn[i]){
-        animal_number$TotalNP_barn[i+1]=animal_number$TotalNP_barn[i]+animal_number$totalNP[i]-animal_number$Fert_applied[i]
-        animal_number$Total_N_barn_stored[i+1]=animal_number$Total_N_barn_stored[i] + animal_number$total_N_barn[i+1]-(animal_number$Total_N_barn_stored[i]/animal_number$TotalNP_barn[i])*animal_number$Fert_applied[i]
-        animal_number$Total_P_barn_stored[i+1] = animal_number$Total_P_barn_stored[i] + animal_number$total_P_barn[i+1]-(animal_number$Total_P_barn_stored[i]/animal_number$TotalNP_barn[i])*animal_number$Fert_applied[i]
-      } else{
-        stop("Increase the number of animal in the barn or decrease the amount of fertilizer applied")
-        
+      if (animal_number$Fert_applied[i] > animal_number$TotalNP_barn[i]){
+        animal_number$Fert_applied[i] = animal_number$TotalNP_barn[i]
+        message(paste0("for HRU that have fert app on",animal_number$Date[i], "the amount of fertilization is more than stored manure, applied fert is set to", animal_number$TotalNP_barn[i]))
       }
+      animal_number$TotalNP_barn[i+1]=animal_number$TotalNP_barn[i]+animal_number$totalNP[i]-animal_number$Fert_applied[i]
+      animal_number$Total_N_barn_stored[i+1]=animal_number$Total_N_barn_stored[i] + animal_number$total_N_barn[i+1]-(animal_number$Total_N_barn_stored[i]/animal_number$TotalNP_barn[i])*animal_number$Fert_applied[i]
+      animal_number$Total_P_barn_stored[i+1] = animal_number$Total_P_barn_stored[i] + animal_number$total_P_barn[i+1]-(animal_number$Total_P_barn_stored[i]/animal_number$TotalNP_barn[i])*animal_number$Fert_applied[i]
     }
   }
   ###################################################
@@ -357,10 +357,10 @@ Dairy_df=function(iCalf = 220,iHeifer_first_lact = 70,iHeifer_second_lact = 70,i
   
   ####get fractions 
   #####################################
-  animal_number$Pmin_frac=NA ## fraction of mineral P in fertilizer (dairy manure) (kg min_P/kg fertilizer)
-  animal_number$Porg_frac=NA ## fraction of organic P in fertilizer (dairy manure) (kg org-P/kg fertilizer)
-  animal_number$Norg_frac=NA ## fraction of organic N in fertilizer (dairy manure) (kg org-N/kg fertilizer)
-  animal_number$Nmin_frac=NA ## fraction mineral N in fertilizer (dairy manure) (kg min_N/kg fertilizer)
+  animal_number$Pmin_frac=0 ## fraction of mineral P in fertilizer (dairy manure) (kg min_P/kg fertilizer)
+  animal_number$Porg_frac=0 ## fraction of organic P in fertilizer (dairy manure) (kg org-P/kg fertilizer)
+  animal_number$Norg_frac=0 ## fraction of organic N in fertilizer (dairy manure) (kg org-N/kg fertilizer)
+  animal_number$Nmin_frac=0 ## fraction mineral N in fertilizer (dairy manure) (kg min_N/kg fertilizer)
   if (animal_number$TotalNP_barn == 0){
     animal_number$Pmin_frac = 0.
     animal_number$Porg_frac = 0.
@@ -374,3 +374,4 @@ Dairy_df=function(iCalf = 220,iHeifer_first_lact = 70,iHeifer_second_lact = 70,i
   }
   return(animal_number)
 }
+
