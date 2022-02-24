@@ -331,7 +331,7 @@ Dairy_df=function(iCalf = 220,iHeifer_first_lact = 70,iHeifer_second_lact = 70,i
     if (i+1 <= nrow(Date)){
       if (animal_number$Fert_applied[i] > animal_number$TotalNP_barn[i]){
         animal_number$Fert_applied[i] = animal_number$TotalNP_barn[i]
-        message(paste0("for HRU that have fert app on",animal_number$Date[i], "the amount of fertilization is more than stored manure, applied fert is set to", animal_number$TotalNP_barn[i]))
+        message(paste0("for HRU that have fert app on",animal_number$Date[i], "the amount of fertilization is more than stored manure, applied fert in kg is set to", animal_number$TotalNP_barn[i]))
       }
       animal_number$TotalNP_barn[i+1]=animal_number$TotalNP_barn[i]+animal_number$totalNP[i]-animal_number$Fert_applied[i]
       animal_number$Total_N_barn_stored[i+1]=animal_number$Total_N_barn_stored[i] + animal_number$total_N_barn[i+1]-(animal_number$Total_N_barn_stored[i]/animal_number$TotalNP_barn[i])*animal_number$Fert_applied[i]
