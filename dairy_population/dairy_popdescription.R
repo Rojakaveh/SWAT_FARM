@@ -193,7 +193,7 @@ for (i in (1:(nrow(Date)))){
   Animal_df$SecondLC_cull[i]=Animal_df$SecondLC[i]*(1-C2CR)/365 ##2nd lactation cows cull
   Animal_df$SecondLC_to_BredSecLC[i]=(Animal_df$SecondLC[i]/85) ## 2nd lactating cows to bred 2nd lactating cows
   
-  ## Population of Dry, Bred Heifer Cows
+  ### Population of Dry, Bred Heifer Cows
   ##--------------- Bred 2nd lactating cows-----------------------
   Animal_df$BredSecLC_death[i]=Animal_df$BredSecLC[i]*kMortality_BredSecLC/365 # Bred 2nd lactating cows death loss
   Animal_df$BredSecLC_to_DSecondLC[i]=Animal_df$BredSecLC[i]/220  # bred 2nd lactating cows to dry 2nd loc cows 
