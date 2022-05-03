@@ -1,6 +1,6 @@
 pacman::p_load(lubridate)
 setwd("~/SWATFARM/")
-#1-you have to initialize with ArcSWAT/QSWAT
+#1- you have to initialize with ArcSWAT/QSWAT
 #2-you run the mangment routine
 #3-calibrate flow and nutrients for SWAT 
 #4-comparison between base scenario and new scenario
