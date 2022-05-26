@@ -226,22 +226,22 @@ Dairy_df=function(kMortality_calf=0.07,kMortality_yearling=0.03,kMortality_bredH
   ######################################################################
   ##calculations of weights using dairy_ADG function
   ###############################################################
-  #wt updating which is a function of t (time)
+   #wt updating which is a function of t (time)
   wtLact = dairy_ADG(2500) #wt of lact kg
   wtDry = dairy_ADG(2500)  #wt of dry
   wtCalf = dairy_ADG(365)  #wt of calf
-  wtyearling=dairy_ADG(365+90) #wt yearling
-  wtbreadHeifer=dairy_ADG(365*2) #wt bred heifers
-  wtHeifer_first_lact = dairy_ADG(365*2+85) #wt of HFL
-  wtBredLactHeif=dairy_ADG(365*2+85+220) #wt bred 1st lactating heifers
-  wtHeifer_second_lact = dairy_ADG(365*3+85) #wt of HSL
-  wtBred2ndLC=dairy_ADG(365*3+85+220) #wt bred 2nd lactating cows
-  wtHeifer_third_lact = dairy_ADG(365*4+85) #wt of HTL
-  wtBred3rdLC=dairy_ADG(365*4+85+220) # wt bred 3rd lactating cows
-  WTHFD = dairy_ADG(365*3) #wt of HFD
-  WTSFD = dairy_ADG(365*4) #wt of HSD
-  WTHTD = dairy_ADG(365*5) #wt of HTD
-  wtbredLC=dairy_ADG(365*5+85) #wt of fourth or greater bred lactating cows
+  wtyearling=dairy_ADG(455) #wt yearling
+  wtbreadHeifer=dairy_ADG(740) #wt bred heifers
+  wtHeifer_first_lact = dairy_ADG(825) #wt of HFL
+  wtBredLactHeif=dairy_ADG(1045) #wt bred 1st lactating heifers
+  wtHeifer_second_lact = dairy_ADG(1190) #wt of HSL
+  wtBred2ndLC=dairy_ADG(1410) #wt bred 2nd lactating cows
+  wtHeifer_third_lact = dairy_ADG(1555) #wt of HTL
+  wtBred3rdLC=dairy_ADG(1775) # wt bred 3rd lactating cows
+  WTHFD = dairy_ADG(1105) #wt of HFD
+  WTSFD = dairy_ADG(1470) #wt of HSD
+  WTHTD = dairy_ADG(1835) #wt of HTD
+  wtbredLC=dairy_ADG(2500) #wt of fourth or greater bred lactating cows
   #################################################################################
   ######### DMI dry matter intak function for calf, BW is an argument and dry matter intake (DMI) is an output
   ##############################################################################
