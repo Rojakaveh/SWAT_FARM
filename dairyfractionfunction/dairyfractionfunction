@@ -6,8 +6,8 @@ Dairy_df=function(kMortality_calf=0.07,kMortality_yearling=0.03,kMortality_bredH
                   C4CR= 0.40,PropF= 0.50,PropKeep = 0.70,iCalf = 50,iHeifer_first_lact =50,iHeifer_second_lact = 50,
                   iHeifer_third_lact =50,iHeifer_first_dry = 50,iHeifer_second_dry = 50,iHeifer_third_dry =50,
                   iLact = 50,iDry =50,iyearling=50,ibredHeifer=50,iBLH=50,iBredSecLC=50,iBredThirdLC=50,iBredLC=50,
-                  Barn_capacity=310,Breed = 1,FCM = 3.0,calf_ME = 5.0,calf_CP = 16.0,fed_calf_P = 45,heifer_ME = 5.0,
-                  heifer_CP = 17.0,fed_heifer_P = 45,lact_CP = 17.0,fed_lact_P = 45,dry_CP = 17.0,fed_dry_P = 45,
+                  Barn_capacity=310,Breed = 1,FCM = 3.0,calf_ME = 5.0,calf_CP = 16.0,fed_calf_P = 0.45,heifer_ME = 5.0,
+                  heifer_CP = 17.0,fed_heifer_P = 0.45,lact_CP = 17.0,fed_lact_P = 0.45,dry_CP = 17.0,fed_dry_P = 0.45,
                   HRS = 12.0,Temp = 24.0,RHMD = 75.0,WS = 1.0){
   
   Animal_df= data.frame(matrix(ncol=60, nrow=nrow(Date)))
